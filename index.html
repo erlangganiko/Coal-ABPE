@@ -40,7 +40,9 @@
         <h1>Premium Coconut Charcoal Bricket</h1>
         <p>Clean Energy. High Heat. Ready for Global Export.</p>
         <div class="hero-buttons">
-          <a href="#" class="btn btn-primary" id="chat-whatsapp-btn">Chat via WhatsApp</a>
+          <a href="#" class="btn btn-primary" id="chat-whatsapp-btn"
+            >Chat via WhatsApp</a
+          >
           <button class="btn btn-secondary">Get Quotation</button>
         </div>
       </div>
@@ -61,8 +63,12 @@
         <div class="product-display-info">
           <h3 id="active-product-title"></h3>
           <p id="active-product-description"></p>
-          <a href="#" class="btn btn-dark" id="get-quote-now-btn">Get a Quote Now!</a>
-          <button class="btn btn-dark" id="open-analysis-modal-btn">Analisis</button>
+          <a href="#" class="btn btn-dark" id="get-quote-now-btn"
+            >Get a Quote Now!</a
+          >
+          <button class="btn btn-dark" id="open-analysis-modal-btn">
+            Analisis
+          </button>
         </div>
       </div>
     </section>
@@ -227,7 +233,9 @@
             <p><span class="check-icon">✅</span> Valid Until 2026</p>
           </div>
           <div class="document-action">
-            <a href="#"> <span class="lock-icon">📄</span> View Summary </a>
+            <a href="#" class="open-modal-btn">
+              <span class="lock-icon">🔒</span> Request Access
+            </a>
           </div>
         </div>
       </div>
@@ -356,7 +364,11 @@
         <button class="modal-close-btn">&times;</button>
         <h3>Kirim Pesan ke ABPE</h3>
         <form action="#" id="contact-form">
-          <input type="hidden" name="access_key" value="6931b2c5-0978-482b-8023-aab6018cfb56">
+          <input
+            type="hidden"
+            name="access_key"
+            value="6931b2c5-0978-482b-8023-aab6018cfb56"
+          />
           <input type="text" name="name" placeholder="Name" required />
           <input type="email" name="email" placeholder="Email" required />
           <textarea
@@ -371,9 +383,21 @@
     </div>
     <div id="analysis-modal" class="modal-overlay">
       <div class="modal-content">
-        <button class="modal-close-btn" id="close-analysis-modal-btn">&times;</button>
+        <button class="modal-close-btn" id="close-analysis-modal-btn">
+          &times;
+        </button>
         <h3>Product Analysis</h3>
-        <img src="" alt="Product Analysis Image" id="analysis-product-img" style="width: 100%; height: auto; border-radius: 8px; margin-top: 1rem;" />
+        <img
+          src=""
+          alt="Product Analysis Image"
+          id="analysis-product-img"
+          style="
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 1rem;
+          "
+        />
       </div>
     </div>
     <script src="js/main.js"></script>
