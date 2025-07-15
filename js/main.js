@@ -1,23 +1,3 @@
-// Pastikan kode ini ada di dalam file JavaScript Anda
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Ambil elemen navbar dari HTML
-  const navbar = document.querySelector(".navbar");
-
-  // Tambahkan 'event listener' untuk mendeteksi scroll pada window
-  window.addEventListener("scroll", () => {
-    // Cek jika posisi scroll vertikal lebih besar dari 50 pixel
-    if (window.scrollY > 50) {
-      // Jika ya, tambahkan class 'scrolled' ke navbar
-      navbar.classList.add("scrolled");
-    } else {
-      // Jika tidak (kembali ke atas), hapus class 'scrolled'
-      navbar.classList.remove("scrolled");
-    }
-  });
-
-  // (Kode Anda yang lain untuk menu hamburger dan slider bisa diletakkan di sini)
-});
 document.addEventListener("DOMContentLoaded", function () {
   // =========== Navbar Interactivity ===========
   const navbar = document.querySelector(".navbar");
@@ -38,6 +18,24 @@ document.addEventListener("DOMContentLoaded", function () {
     menuIcon.classList.toggle("active");
     navMenu.classList.toggle("active");
   });
+
+  // =========== Hero Section WhatsApp Button Logic ===========
+  const chatWhatsappBtn = document.getElementById("chat-whatsapp-btn"); // Ambil tombol "Chat via WhatsApp"
+  const heroWhatsappNumber = "6281234567890"; // Ganti dengan nomor WhatsApp ABPE Coal untuk Hero Section
+
+  if (chatWhatsappBtn) {
+    chatWhatsappBtn.addEventListener('click', function(event) {
+      event.preventDefault(); // Mencegah perilaku default tautan
+
+      const message = encodeURIComponent(
+        `Hello ABPE Coal, I'm interested in your premium charcoal briquette products. Could I get more information or discuss placing an order? Thank you!` // ENGLISH MESSAGE
+      );
+      const whatsappUrl = `https://wa.me/${heroWhatsappNumber}?text=${message}`;
+      window.open(whatsappUrl, '_blank'); // Buka di tab/jendela baru
+    });
+  }
+  // =========== END Hero Section WhatsApp Button Logic ===========
+
 
   // =========== Product Slider Logic ===========
   const productData = [
@@ -86,8 +84,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const activeProductDesc = document.getElementById(
     "active-product-description"
   );
+  const getQuoteBtn = document.getElementById("get-quote-now-btn"); // Mengambil tombol "Get a Quote Now!"
 
   let currentIndex = 0;
+
+  // Nomor WhatsApp tujuan (ganti dengan nomor Anda untuk produk)
+  const productWhatsappNumber = "6281234567890"; // Nomor WA yang sama atau berbeda untuk Product Section
 
   // Load products into slider
   function loadProducts() {
@@ -122,6 +124,21 @@ document.addEventListener("DOMContentLoaded", function () {
         slide.classList.remove("active");
       }
     });
+
+    // Perbarui fungsi tombol 'Get a Quote Now!' sesuai produk yang aktif
+    updateGetQuoteButton(product);
+  }
+
+  // Fungsi untuk memperbarui URL WhatsApp pada tombol "Get a Quote Now!"
+  function updateGetQuoteButton(product) {
+    const message = encodeURIComponent(
+      `Hello ABPE Coal, I am interested in your *${product.title}* product. Could you please provide more information or a price quotation for this item? I look forward to your prompt reply! Thank you.` // ENGLISH MESSAGE
+    );
+    if (getQuoteBtn) {
+        getQuoteBtn.href = `https://wa.me/${productWhatsappNumber}?text=${message}`;
+        getQuoteBtn.setAttribute('target', '_blank');
+        getQuoteBtn.setAttribute('rel', 'noopener noreferrer');
+    }
   }
 
   // Event Listeners for slider arrows
@@ -137,52 +154,154 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialize slider
   loadProducts();
-  updateProductDisplay(currentIndex);
-});
+  updateProductDisplay(currentIndex); // Panggil ini sekali di awal untuk mengisi data produk pertama
+  updateGetQuoteButton(productData[currentIndex]); // Inisialisasi tombol quote untuk produk pertama
 
-// Letakkan kode ini di dalam event listener DOMContentLoaded
 
-// =========== Modal (Popup) Logic ===========
-const modalOverlay = document.getElementById("contact-modal");
-const openModalButtons = document.querySelectorAll(".open-modal-btn");
-const closeModalButton = document.querySelector(".modal-close-btn");
+  // =========== Contact Modal Logic (Updated for Email Form) ===========
+  const contactModalOverlay = document.getElementById("contact-modal");
+  const openContactModalButtons = document.querySelectorAll(".open-modal-btn");
+  const closeContactModalButton = contactModalOverlay.querySelector(".modal-close-btn");
+  const contactForm = document.getElementById("contact-form"); // Ambil form berdasarkan ID
 
-// Function to open the modal
-const openModal = () => {
-  modalOverlay.classList.add("show");
-};
+  // Fungsi untuk membuka modal kontak
+  const openContactModal = () => {
+    contactModalOverlay.classList.add("show");
+    // Hapus pesan status sebelumnya saat modal dibuka kembali
+    const existingStatus = contactForm.parentNode.querySelector('.form-status');
+    if (existingStatus) {
+        existingStatus.remove();
+    }
+    contactForm.reset(); // Pastikan form direset juga saat dibuka
+  };
 
-// Function to close the modal
-const closeModal = () => {
-  modalOverlay.classList.remove("show");
-};
+  // Fungsi untuk menutup modal kontak
+  const closeContactModal = () => {
+    contactModalOverlay.classList.remove("show");
+    if (contactForm) {
+      contactForm.reset(); // Reset form saat modal ditutup
+    }
+    // HAPUS pesan status saat modal ditutup
+    const existingStatus = contactForm.parentNode.querySelector('.form-status');
+    if (existingStatus) {
+        existingStatus.remove();
+    }
+  };
 
-// Add event listener to all "Request Access" buttons
-openModalButtons.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    event.preventDefault(); // Prevent default link behavior
-    openModal();
+  // Add event listener to all "Request Access" buttons in Legal section
+  openContactModalButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault(); // Mencegah default link behavior
+      openContactModal();
+    });
   });
-});
 
-// Add event listener to the close button
-if (closeModalButton) {
-  closeModalButton.addEventListener("click", closeModal);
-}
+  // Add event listener to the close button for contact modal
+  if (closeContactModalButton) {
+    closeContactModalButton.addEventListener("click", closeContactModal);
+  }
 
-// Add event listener to the overlay to close modal when clicking outside
-if (modalOverlay) {
-  modalOverlay.addEventListener("click", (event) => {
-    // Close modal only if the overlay itself is clicked, not the content
-    if (event.target === modalOverlay) {
-      closeModal();
+  // Add event listener to the overlay to close contact modal when clicking outside
+  if (contactModalOverlay) {
+    contactModalOverlay.addEventListener("click", (event) => {
+      if (event.target === contactModalOverlay) {
+        closeContactModal();
+      }
+    });
+  }
+
+  // Handle form submission
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      let formStatus = contactForm.parentNode.querySelector('.form-status');
+      if (!formStatus) { // Buat elemen status jika belum ada
+          formStatus = document.createElement('div');
+          formStatus.style.marginTop = '1rem';
+          formStatus.style.textAlign = 'center';
+          formStatus.classList.add('form-status'); // Pastikan kelas ditambahkan
+          contactForm.parentNode.appendChild(formStatus);
+      }
+      formStatus.textContent = ''; // Bersihkan teks status sebelumnya
+      formStatus.style.color = ''; // Bersihkan warna status
+      formStatus.className = 'form-status'; // Reset kelas status
+
+      // === INTEGRASI EMAIL (GANTI DENGAN ENDPOINT FORMSPREE/WEB3FORMS ANDA) ===
+      const formspreeEndpoint = "https://formspree.io/f/your_form_id"; // GANTI DENGAN ENDPOINT FORMSPREE ANDA
+
+      try {
+        const response = await fetch(formspreeEndpoint, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          formStatus.className = 'form-status success';
+          formStatus.style.color = 'green';
+          formStatus.textContent = 'Your message has been sent successfully! We will contact you shortly.'; // ENGLISH MESSAGE
+          setTimeout(closeContactModal, 3000); // Tutup modal setelah 3 detik
+        } else {
+          formStatus.className = 'form-status error';
+          formStatus.style.color = 'red';
+          formStatus.textContent = 'Failed to send message. Please try again.'; // ENGLISH MESSAGE
+          console.error('Form submission failed:', await response.json());
+        }
+      } catch (error) {
+        formStatus.className = 'form-status error';
+        formStatus.style.color = 'red';
+        formStatus.textContent = 'A network error occurred. Please try again.'; // ENGLISH MESSAGE
+        console.error('Error submitting form:', error);
+      }
+    });
+  }
+
+  // =========== Analysis Modal Logic ===========
+  const analysisModalOverlay = document.getElementById("analysis-modal");
+  const openAnalysisModalBtn = document.getElementById("open-analysis-modal-btn");
+  const closeAnalysisModalBtn = analysisModalOverlay.querySelector(".modal-close-btn");
+  const analysisProductImg = document.getElementById("analysis-product-img");
+  const analysisProductTitle = document.getElementById("analysis-product-title");
+
+  const openAnalysisModal = () => {
+    const currentProduct = productData[currentIndex];
+    analysisProductImg.src = currentProduct.image;
+    analysisProductTitle.textContent = currentProduct.title;
+    analysisModalOverlay.classList.add("show");
+  };
+
+  const closeAnalysisModal = () => {
+    analysisModalOverlay.classList.remove("show");
+  };
+
+  if (openAnalysisModalBtn) {
+    openAnalysisModalBtn.addEventListener("click", openAnalysisModal);
+  }
+
+  if (closeAnalysisModalBtn) {
+    closeAnalysisModalBtn.addEventListener("click", closeAnalysisModal);
+  }
+
+  if (analysisModalOverlay) {
+    analysisModalOverlay.addEventListener("click", (event) => {
+      if (event.target === analysisModalOverlay) {
+        closeAnalysisModal();
+      }
+    });
+  }
+
+  // Optional: Close any modal with the 'Escape' key
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      if (contactModalOverlay.classList.contains("show")) {
+        closeContactModal();
+      }
+      if (analysisModalOverlay.classList.contains("show")) {
+        closeAnalysisModal();
+      }
     }
   });
-}
-
-// Optional: Close modal with the 'Escape' key
-window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && modalOverlay.classList.contains("show")) {
-    closeModal();
-  }
 });

@@ -11,7 +11,6 @@
     />
   </head>
   <body>
-    <!--Navbar Start -->
     <nav class="navbar">
       <div class="navbar-container">
         <a href="#" class="navbar-logo">
@@ -31,9 +30,6 @@
         </ul>
       </div>
     </nav>
-    <!--Navbar End -->
-
-    <!--Hero Start -->
     <section class="hero">
       <video autoplay muted loop class="hero-video-bg">
         <source src="assets/video/coal.mp4" type="video/mp4" />
@@ -44,14 +40,11 @@
         <h1>Premium Coconut Charcoal Bricket</h1>
         <p>Clean Energy. High Heat. Ready for Global Export.</p>
         <div class="hero-buttons">
-          <button class="btn btn-primary">Chat via WhatsApp</button>
+          <a href="#" class="btn btn-primary" id="chat-whatsapp-btn">Chat via WhatsApp</a>
           <button class="btn btn-secondary">Get Quotation</button>
         </div>
       </div>
     </section>
-    <!--Hero End -->
-
-    <!--Products Start -->
     <section class="products">
       <h2 class="section-title">Discover Our Product</h2>
 
@@ -68,14 +61,11 @@
         <div class="product-display-info">
           <h3 id="active-product-title"></h3>
           <p id="active-product-description"></p>
-          <button class="btn btn-dark">Get a Quote Now!</button>
-          <button class="btn btn-dark">Analisis</button>
+          <a href="#" class="btn btn-dark" id="get-quote-now-btn">Get a Quote Now!</a>
+          <button class="btn btn-dark" id="open-analysis-modal-btn">Analisis</button>
         </div>
       </div>
     </section>
-    <!--Products End -->
-
-    <!--Shiping Start -->
     <section class="shipping">
       <h2 class="section-title">Shipping & Transportation</h2>
 
@@ -180,9 +170,6 @@
         </div>
       </div>
     </section>
-    <!--Shiping End -->
-
-    <!--Legal Start -->
     <section class="legal">
       <h2 class="section-title">Legal & Compliance</h2>
       <p class="section-subtitle">
@@ -245,9 +232,6 @@
         </div>
       </div>
     </section>
-    <!--Legal End -->
-
-    <!--Supplier Starts -->
     <section class="about-supplier">
       <div class="about-supplier-grid">
         <div class="about-supplier-text">
@@ -270,9 +254,6 @@
         </div>
       </div>
     </section>
-    <!--Supplier End -->
-
-    <!--Insights Start -->
     <section class="insights">
       <h2 class="section-title">Insights & Stories</h2>
       <p class="section-subtitle">
@@ -329,9 +310,6 @@
         </div>
       </div>
     </section>
-    <!--Insights End -->
-
-    <!--Footer Start -->
     <footer class="site-footer">
       <div class="footer-container">
         <div class="footer-col">
@@ -373,14 +351,12 @@
         <p>&copy; 2025 ABPE Coal. All Rights Reserved.</p>
       </div>
     </footer>
-    <!--Footer End -->
-
-    <!--Contact Start -->
     <div id="contact-modal" class="modal-overlay">
       <div class="modal-content">
         <button class="modal-close-btn">&times;</button>
         <h3>Kirim Pesan ke ABPE</h3>
-        <form action="#">
+        <form action="#" id="contact-form">
+          <input type="hidden" name="access_key" value="6931b2c5-0978-482b-8023-aab6018cfb56">
           <input type="text" name="name" placeholder="Name" required />
           <input type="email" name="email" placeholder="Email" required />
           <textarea
@@ -393,7 +369,13 @@
         </form>
       </div>
     </div>
-    <!--Contact End -->
+    <div id="analysis-modal" class="modal-overlay">
+      <div class="modal-content">
+        <button class="modal-close-btn" id="close-analysis-modal-btn">&times;</button>
+        <h3>Product Analysis</h3>
+        <img src="" alt="Product Analysis Image" id="analysis-product-img" style="width: 100%; height: auto; border-radius: 8px; margin-top: 1rem;" />
+      </div>
+    </div>
     <script src="js/main.js"></script>
   </body>
 </html>
