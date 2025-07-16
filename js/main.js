@@ -24,18 +24,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const heroWhatsappNumber = "6281234567890"; // Ganti dengan nomor WhatsApp ABPE Coal untuk Hero Section
 
   if (chatWhatsappBtn) {
-    chatWhatsappBtn.addEventListener('click', function(event) {
+    chatWhatsappBtn.addEventListener("click", function (event) {
       event.preventDefault(); // Mencegah perilaku default tautan
 
       const message = encodeURIComponent(
         `Hello ABPE Coal, I'm interested in your premium charcoal briquette products. Could I get more information or discuss placing an order? Thank you!` // ENGLISH MESSAGE
       );
       const whatsappUrl = `https://wa.me/${heroWhatsappNumber}?text=${message}`;
-      window.open(whatsappUrl, '_blank'); // Buka di tab/jendela baru
+      window.open(whatsappUrl, "_blank"); // Buka di tab/jendela baru
     });
   }
   // =========== END Hero Section WhatsApp Button Logic ===========
-
 
   // =========== Product Slider Logic ===========
   const productData = [
@@ -135,9 +134,9 @@ document.addEventListener("DOMContentLoaded", function () {
       `Hello ABPE Coal, I am interested in your *${product.title}* product. Could you please provide more information or a price quotation for this item? I look forward to your prompt reply! Thank you.` // ENGLISH MESSAGE
     );
     if (getQuoteBtn) {
-        getQuoteBtn.href = `https://wa.me/${productWhatsappNumber}?text=${message}`;
-        getQuoteBtn.setAttribute('target', '_blank');
-        getQuoteBtn.setAttribute('rel', 'noopener noreferrer');
+      getQuoteBtn.href = `https://wa.me/${productWhatsappNumber}?text=${message}`;
+      getQuoteBtn.setAttribute("target", "_blank");
+      getQuoteBtn.setAttribute("rel", "noopener noreferrer");
     }
   }
 
@@ -157,20 +156,20 @@ document.addEventListener("DOMContentLoaded", function () {
   updateProductDisplay(currentIndex); // Panggil ini sekali di awal untuk mengisi data produk pertama
   updateGetQuoteButton(productData[currentIndex]); // Inisialisasi tombol quote untuk produk pertama
 
-
   // =========== Contact Modal Logic (Updated for Email Form) ===========
   const contactModalOverlay = document.getElementById("contact-modal");
   const openContactModalButtons = document.querySelectorAll(".open-modal-btn");
-  const closeContactModalButton = contactModalOverlay.querySelector(".modal-close-btn");
+  const closeContactModalButton =
+    contactModalOverlay.querySelector(".modal-close-btn");
   const contactForm = document.getElementById("contact-form"); // Ambil form berdasarkan ID
 
   // Fungsi untuk membuka modal kontak
   const openContactModal = () => {
     contactModalOverlay.classList.add("show");
     // Hapus pesan status sebelumnya saat modal dibuka kembali
-    const existingStatus = contactForm.parentNode.querySelector('.form-status');
+    const existingStatus = contactForm.parentNode.querySelector(".form-status");
     if (existingStatus) {
-        existingStatus.remove();
+      existingStatus.remove();
     }
     contactForm.reset(); // Pastikan form direset juga saat dibuka
   };
@@ -182,9 +181,9 @@ document.addEventListener("DOMContentLoaded", function () {
       contactForm.reset(); // Reset form saat modal ditutup
     }
     // HAPUS pesan status saat modal ditutup
-    const existingStatus = contactForm.parentNode.querySelector('.form-status');
+    const existingStatus = contactForm.parentNode.querySelector(".form-status");
     if (existingStatus) {
-        existingStatus.remove();
+      existingStatus.remove();
     }
   };
 
@@ -212,59 +211,66 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Handle form submission
   if (contactForm) {
-    contactForm.addEventListener('submit', async function (event) {
+    contactForm.addEventListener("submit", async function (event) {
       event.preventDefault();
 
-      let formStatus = contactForm.parentNode.querySelector('.form-status');
-      if (!formStatus) { // Buat elemen status jika belum ada
-          formStatus = document.createElement('div');
-          formStatus.style.marginTop = '1rem';
-          formStatus.style.textAlign = 'center';
-          formStatus.classList.add('form-status'); // Pastikan kelas ditambahkan
-          contactForm.parentNode.appendChild(formStatus);
+      let formStatus = contactForm.parentNode.querySelector(".form-status");
+      if (!formStatus) {
+        // Buat elemen status jika belum ada
+        formStatus = document.createElement("div");
+        formStatus.style.marginTop = "1rem";
+        formStatus.style.textAlign = "center";
+        formStatus.classList.add("form-status"); // Pastikan kelas ditambahkan
+        contactForm.parentNode.appendChild(formStatus);
       }
-      formStatus.textContent = ''; // Bersihkan teks status sebelumnya
-      formStatus.style.color = ''; // Bersihkan warna status
-      formStatus.className = 'form-status'; // Reset kelas status
+      formStatus.textContent = ""; // Bersihkan teks status sebelumnya
+      formStatus.style.color = ""; // Bersihkan warna status
+      formStatus.className = "form-status"; // Reset kelas status
 
       // === INTEGRASI EMAIL (GANTI DENGAN ENDPOINT FORMSPREE/WEB3FORMS ANDA) ===
       const formspreeEndpoint = "https://formspree.io/f/your_form_id"; // GANTI DENGAN ENDPOINT FORMSPREE ANDA
 
       try {
         const response = await fetch(formspreeEndpoint, {
-          method: 'POST',
+          method: "POST",
           body: new FormData(contactForm),
           headers: {
-            'Accept': 'application/json'
-          }
+            Accept: "application/json",
+          },
         });
 
         if (response.ok) {
-          formStatus.className = 'form-status success';
-          formStatus.style.color = 'green';
-          formStatus.textContent = 'Your message has been sent successfully! We will contact you shortly.'; // ENGLISH MESSAGE
+          formStatus.className = "form-status success";
+          formStatus.style.color = "green";
+          formStatus.textContent =
+            "Your message has been sent successfully! We will contact you shortly."; // ENGLISH MESSAGE
           setTimeout(closeContactModal, 3000); // Tutup modal setelah 3 detik
         } else {
-          formStatus.className = 'form-status error';
-          formStatus.style.color = 'red';
-          formStatus.textContent = 'Failed to send message. Please try again.'; // ENGLISH MESSAGE
-          console.error('Form submission failed:', await response.json());
+          formStatus.className = "form-status error";
+          formStatus.style.color = "red";
+          formStatus.textContent = "Failed to send message. Please try again."; // ENGLISH MESSAGE
+          console.error("Form submission failed:", await response.json());
         }
       } catch (error) {
-        formStatus.className = 'form-status error';
-        formStatus.style.color = 'red';
-        formStatus.textContent = 'A network error occurred. Please try again.'; // ENGLISH MESSAGE
-        console.error('Error submitting form:', error);
+        formStatus.className = "form-status error";
+        formStatus.style.color = "red";
+        formStatus.textContent = "A network error occurred. Please try again."; // ENGLISH MESSAGE
+        console.error("Error submitting form:", error);
       }
     });
   }
 
   // =========== Analysis Modal Logic ===========
   const analysisModalOverlay = document.getElementById("analysis-modal");
-  const openAnalysisModalBtn = document.getElementById("open-analysis-modal-btn");
-  const closeAnalysisModalBtn = analysisModalOverlay.querySelector(".modal-close-btn");
+  const openAnalysisModalBtn = document.getElementById(
+    "open-analysis-modal-btn"
+  );
+  const closeAnalysisModalBtn =
+    analysisModalOverlay.querySelector(".modal-close-btn");
   const analysisProductImg = document.getElementById("analysis-product-img");
-  const analysisProductTitle = document.getElementById("analysis-product-title");
+  const analysisProductTitle = document.getElementById(
+    "analysis-product-title"
+  );
 
   const openAnalysisModal = () => {
     const currentProduct = productData[currentIndex];
