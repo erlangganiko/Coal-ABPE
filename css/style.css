@@ -169,7 +169,7 @@ body {
 
 /* =========== Product Section =========== */
 .products {
-  padding: 6rem 5%;
+  padding: 4rem 5% 6rem 5%; /* Sedikit mengurangi padding atas */
   text-align: center;
   background-color: white;
 }
@@ -181,11 +181,17 @@ body {
   font-weight: 700;
 }
 
-.product-slider {
+/* [FIX-1] Wrapper baru untuk slider agar panah tidak terpotong */
+.slider-container {
   position: relative;
-  width: 80%;
+  width: 90%; /* Dibuat lebih lebar agar tidak sempit */
   margin: 0 auto;
-  overflow: hidden;
+}
+
+.product-slider {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden; /* Biarkan overflow hidden di sini */
 }
 
 .slider-track {
@@ -194,11 +200,11 @@ body {
 }
 
 .slide {
-  min-width: 20%; /* Shows 5 items */
-  padding: 0.5rem; /* Reduced padding to make it less "boxy" */
+  min-width: 20%; /* 5 item di desktop */
+  padding: 0.5rem;
   transition: transform 0.4s ease, opacity 0.4s ease;
   opacity: 0.5;
-  transform: scale(0.9); /* Slightly reduced default scale */
+  transform: scale(0.9);
 }
 
 .slide.active {
@@ -206,12 +212,15 @@ body {
   transform: scale(1.1);
 }
 
+/* [FIX-2] Membuat semua gambar slider setara tingginya */
 .slide img {
   width: 100%;
+  height: 150px; /* Atur tinggi yang sama untuk semua gambar */
+  object-fit: cover; /* Memastikan gambar terisi tanpa distorsi */
   border-radius: 8px;
-  /* Removed box-shadow here to eliminate the "box" around slider images */
 }
 
+/* [FIX-1] Penyesuaian posisi panah */
 .slider-arrow {
   position: absolute;
   top: 50%;
@@ -219,69 +228,59 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  font-size: 2rem;
+  font-size: 1.8rem; /* Sedikit diperkecil agar lebih proporsional */
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 50%; /* Dibuat bulat agar lebih modern */
   z-index: 10;
+  transition: background-color 0.3s ease;
 }
 
+.slider-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Panah sekarang diposisikan relatif terhadap .slider-container */
 .slider-arrow.prev {
-  left: -20px;
+  left: -25px;
 }
 
 .slider-arrow.next {
-  right: -20px;
+  right: -25px;
 }
 
-/* Container utama yang sekarang menjadi KOTAK TIMBUL */
+/* =========== Kotak Timbul Display Produk =========== */
 .product-display {
   display: flex;
   align-items: center;
-  gap: 2rem; /* Sedikit mengurangi jarak antar elemen di dalam */
-  width: 80%; /* Bisa disesuaikan agar lebih lebar */
+  gap: 2rem;
+  width: 80%;
   margin: 4rem auto 0 auto;
   text-align: left;
-
-  /* Properti yang dipindahkan ke sini */
   background-color: #ffffff;
-  padding: 2rem; /* Padding untuk seluruh kotak */
+  padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Efek timbul statis */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .product-display-image {
   flex-basis: 40%;
+  text-align: center;
 }
 
 .product-display-image img {
   width: 100%;
   max-width: 350px;
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Kept shadow for the main display image */
-}
-
-/* Mengatur porsi untuk gambar */
-.product-display-image {
-  flex-basis: 40%;
-  text-align: center; /* Menengahkan gambar jika lebih kecil */
-}
-
-.product-display-image img {
-  width: 100%;
-  max-width: 350px;
-  border-radius: 10px;
-  /* Bayangan pada gambar dihilangkan agar tidak tumpang tindih */
   box-shadow: none;
 }
 
-/* Mengatur porsi untuk info teks */
 .product-display-info {
   flex-basis: 60%;
-  /* Semua properti kotak (background, shadow, dll) sudah dihapus dari sini */
 }
 
 .product-display-info h3 {
-  margin-top: 0; /* Menghilangkan margin atas agar rapi */
+  margin-top: 0;
   font-size: 2rem;
   color: #0056b3;
   margin-bottom: 1rem;
@@ -292,19 +291,17 @@ body {
   line-height: 1.6;
   margin-bottom: 2rem;
   color: #555;
-  text-shadow: none; /* Dihapus agar lebih bersih */
+  text-shadow: none;
 }
-.btn-dark {
-  background-color: #343a40;
-  color: white;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 5px;
-  margin-right: 4rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
+
+/* =========== Tombol / Buttons =========== */
+.product-buttons {
+  display: flex;
+  flex-wrap: wrap; /* Agar tombol turun ke bawah jika tidak muat */
+  gap: 1rem;
 }
+
+.btn-dark,
 .btn-dark-get-quote {
   background-color: #343a40;
   color: white;
@@ -314,12 +311,13 @@ body {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-}
-.btn-dark-get-quote:hover {
-  background-color: #23272b;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  margin-right: 0; /* Dihapus karena sudah pakai gap dari .product-buttons */
 }
 
-.btn-dark:hover {
+.btn-dark:hover,
+.btn-dark-get-quote:hover {
   background-color: #23272b;
 }
 
@@ -770,6 +768,8 @@ body {
 .footer-logo {
   font-size: 1.8rem;
   font-weight: 700;
+  max-width: 150px; /* Atur lebar logo, sesuaikan nilainya */
+  margin-bottom: 1rem; /* Memberi jarak antara logo dan elemen di bawahnya */
 }
 
 .footer-col p {
@@ -787,13 +787,13 @@ body {
   transition: color 0.3s, padding-left 0.3s;
   display: inline-block;
   padding: 0.25rem 0;
+  margin-left: 9px;
 }
 
 .footer-col a:hover {
   color: white;
   padding-left: 5px;
 }
-
 .social-links a {
   display: inline-block;
   margin-right: 1rem;
@@ -873,13 +873,10 @@ body {
 
   /* Product Section */
   .slide {
-    min-width: 33.33%; /* Tampilkan 3 item */
+    min-width: 33.33%;
   }
-  .product-display {
-    width: 90%;
-  }
-  .product-display-info h3 {
-    font-size: 1.8rem;
+  .product-display-info button {
+    margin-top: 20px;
   }
 
   /* Shipping Section */
@@ -921,6 +918,9 @@ body {
     display: inline-block; /* Agar list tetap rata kiri */
     text-align: left;
   }
+  .footer-col a {
+    align-items: center;
+  }
 }
 
 /* --- Ponsel (Hingga 768px) --- */
@@ -950,32 +950,37 @@ body {
   }
 
   /* Product Section */
-  .product-slider {
-    width: 100%;
-  }
-  .slider-arrow.prev {
-    left: 5px; /* Pindahkan panah ke dalam di mobile */
-  }
-  .slider-arrow.next {
-    right: 5px; /* Pindahkan panah ke dalam di mobile */
-  }
-  .slide {
-    min-width: 50%; /* Tampilkan 2 item */
-    transform: scale(0.85); /* Sedikit sesuaikan skala */
-  }
-  .slide.active {
-    transform: scale(1); /* Skala aktif tidak terlalu besar */
-  }
-  .product-display {
-    flex-direction: column;
-    text-align: center;
-    width: 95%;
-    gap: 1.5rem;
-  }
-  .product-display-image img {
-    max-width: 300px;
+  .section-title {
+    font-size: 2rem; /* Perkecil judul di mobile */
   }
 
+  /* Panah slider disesuaikan untuk layar kecil */
+  .slider-arrow.prev {
+    left: 10px;
+  }
+  .slider-arrow.next {
+    right: 10px;
+  }
+
+  /* Menampilkan 2 item di mobile */
+  .slide {
+    min-width: 50%;
+  }
+
+  /* Tata letak product-display menjadi vertikal */
+  .product-display {
+    flex-direction: column; /* Ubah jadi tumpukan vertikal */
+    width: 90%; /* Gunakan lebih banyak lebar layar */
+    text-align: center; /* Pusatkan teks untuk container */
+  }
+
+  .product-display-info {
+    text-align: left; /* Kembalikan text-align kiri untuk paragraf */
+  }
+
+  .product-display-info h3 {
+    font-size: 1.8rem;
+  }
   /* Shipping Section */
   .shipping-card {
     flex-basis: 100%; /* Satu kartu per baris */
@@ -1013,10 +1018,15 @@ body {
   }
 
   /* Product Section */
+  /* Menampilkan 1 atau 2 item di layar sangat kecil */
   .slide {
-    min-width: 80%; /* Fokus pada satu item */
+    min-width: 80%;
   }
-  .product-display-info h3 {
-    font-size: 1.5rem;
+  .slider-container {
+    width: 100%; /* Gunakan lebar penuh */
+  }
+
+  .product-buttons {
+    justify-content: center; /* Pusatkan tombol */
   }
 }
