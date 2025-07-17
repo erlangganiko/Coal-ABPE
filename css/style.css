@@ -666,6 +666,7 @@ body {
 .insights {
   padding: 6rem 5%;
   background-color: white;
+  text-align: center;
 }
 
 .insights-grid {
