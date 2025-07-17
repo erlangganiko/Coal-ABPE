@@ -148,22 +148,22 @@ body {
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: green;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: rgb(1, 97, 1);
 }
 
 .btn-secondary {
-  background-color: transparent;
-  color: white;
+  background-color: white;
+  color: black;
   border: 2px solid white;
 }
 
 .btn-secondary:hover {
-  background-color: white;
+  background-color: #ccc;
   color: #333;
 }
 
@@ -300,7 +300,19 @@ body {
   flex-wrap: wrap; /* Agar tombol turun ke bawah jika tidak muat */
   gap: 1rem;
 }
-
+.btn-wa {
+  background-color: green;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  margin-right: 0; /* Dihapus karena sudah pakai gap dari .product-buttons */
+}
 .btn-dark,
 .btn-dark-get-quote {
   background-color: #343a40;
@@ -316,7 +328,9 @@ body {
   margin-right: 0; /* Dihapus karena sudah pakai gap dari .product-buttons */
 }
 
-.btn-dark:hover,
+.btn-wa:hover {
+  background-color: rgb(1, 97, 1);
+}
 .btn-dark-get-quote:hover {
   background-color: #23272b;
 }
