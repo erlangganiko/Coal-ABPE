@@ -192,12 +192,22 @@ body {
   width: 100%;
   margin: 0 auto;
   overflow: hidden; /* Biarkan overflow hidden di sini */
+  cursor: grab;
 }
-
+.product-slider.grabbing {
+  cursor: grabbing; /* Ganti kursor saat sedang drag */
+}
 .slider-track {
   display: flex;
   transition: transform 0.5s ease-in-out;
 }
+/* .slider-track.fade-out {
+  opacity: 0;
+  
+}
+.slider-track.fade-in {
+  opacity: 1;
+} */
 
 .slide {
   min-width: 20%; /* 5 item di desktop */
@@ -248,6 +258,7 @@ body {
 .slider-arrow.next {
   right: -25px;
 }
+
 
 /* =========== Kotak Timbul Display Produk =========== */
 .product-display {
@@ -368,7 +379,7 @@ body {
   display: flex;
   /* Twice the number of logos */
   width: calc(250px * 14);
-  animation: scroll 40s linear infinite;
+  animation: scroll 30s linear infinite;
 }
 
 .logo-track:hover {
@@ -395,13 +406,12 @@ body {
   max-height: 40px;
   width: 100%;
   object-fit: contain;
-  filter: grayscale(100%);
   opacity: 0.6;
   transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
 .logo-item:hover img {
-  filter: grayscale(0%);
+  
   opacity: 1;
 }
 
@@ -937,6 +947,32 @@ body {
     align-items: center;
   }
 }
+/* --- Floating Whatsapp --- */
+/* =========== Floating WhatsApp Button =========== */
+.floating-whatsapp-btn {
+  position: fixed;
+  bottom: 20px; /* Jarak dari bawah */
+  right: 20px; /* Jarak dari kanan */
+  background-color: #25d366; /* Warna hijau WhatsApp */
+  color: white;
+  width: 60px; /* Lebar tombol */
+  height: 60px; /* Tinggi tombol */
+  border-radius: 50%; /* Membuat tombol lingkaran */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.2rem; /* Ukuran ikon WhatsApp */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Efek bayangan */
+  z-index: 1000; /* Pastikan di atas elemen lain */
+  text-decoration: none; /* Hilangkan garis bawah default link */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.floating-whatsapp-btn:hover {
+  background-color: #1da851; /* Warna saat dihover */
+  transform: scale(1.05); /* Sedikit membesar saat dihover */
+}
+
 
 /* --- Ponsel (Hingga 768px) --- */
 @media (max-width: 768px) {
@@ -968,13 +1004,19 @@ body {
   .section-title {
     font-size: 2rem; /* Perkecil judul di mobile */
   }
-
-  /* Panah slider disesuaikan untuk layar kecil */
+.slider-arrow {
+   display: none; 
+  }
+  .product-slider {
+   cursor: grab; }
+  .product-slider.grabbing{
+    cursor: grabbing; /* Ganti kursor saat sedang drag */
+  }
   .slider-arrow.prev {
-    left: 10px;
+    display: none;
   }
   .slider-arrow.next {
-    right: 10px;
+    display: none; /* Sembunyikan panah di mobile */
   }
 
   /* Menampilkan 2 item di mobile */
@@ -1019,6 +1061,13 @@ body {
   /* Supplier*/
   .about-supplier-text h2 {
     font-size: 1.8rem;
+  }
+  .floating-whatsapp-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+    bottom: 15px;
+    right: 15px;
   }
 }
 
