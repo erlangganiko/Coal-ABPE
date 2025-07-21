@@ -104,14 +104,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const activeProductTitle = document.getElementById("active-product-title");
   const activeProductDesc = document.getElementById("active-product-description");
   const getQuoteBtn = document.getElementById("get-quote-now-btn");
-
   const productWhatsappNumber = "6281234567890"; // Nomor WA untuk Product Section
 
   // --- SLIDER GRAB/SWIPE LOGIC VARIABLES ---
   let isDragging = false;
-  let startPos = 0;
-  let currentTranslate = 0;
-  let prevTranslate = 0;
+  let startPos = 0; 
+  let currentTranslate = 0; 
+  let prevTranslate = 0; 
   let animationID;
   const THRESHOLD = 50; // Jarak geser minimal untuk ganti slide
 
@@ -127,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return Math.round(trackWidth / slideWidth);
     }
     return 4; // Fallback
+    
   }
 
   function loadProducts() {
@@ -281,11 +281,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // --- GRAB/SWIPE LOGIC ---
+
   productSlider.addEventListener('mousedown', grabStart);
   productSlider.addEventListener('mouseup', grabEnd);
   productSlider.addEventListener('mouseleave', grabEnd); // Penting jika mouse keluar saat drag
   productSlider.addEventListener('mousemove', grabMove);
-
+  productSlider.addEventListener('dragstart', (event) => event.preventDefault()); // Mencegah drag default pada elemen\
+  
+// Untuk perangkat sentuh
   productSlider.addEventListener('touchstart', grabStart);
   productSlider.addEventListener('touchend', grabEnd);
   productSlider.addEventListener('touchcancel', grabEnd);
@@ -342,21 +345,21 @@ document.addEventListener("DOMContentLoaded", function () {
         moveSlider(direction); // Panggil moveSlider untuk menangani transisi dan looping
     } else {
         // Jika geseran tidak cukup, kembali ke posisi awal slide (snap back)
-        const targetCenterIndex = realIndex + totalClonedSlides;
-        const targetOffset = (sliderTrack.clientWidth / 2) - (slideWidth / 2) - (targetCenterIndex * slideWidth);
+        const targetCenterIndex = realIndex + totalClonedSlides; 
+        const targetOffset = (sliderTrack.clientWidth / 2) - (slideWidth / 2) - (targetCenterIndex * slideWidth); 
         sliderTrack.style.transition = 'transform 0.5s ease-in-out, opacity 0.3s ease-in-out'; // Hidupkan transisi
-        sliderTrack.style.transform = `translateX(${targetOffset}px)`;
+        sliderTrack.style.transform = `translateX(${targetOffset}px)`; 
         prevTranslate = targetOffset;
     }
   }
 
-  function animation() {
-    if (isDragging) {
+  function animation() { 
+    if (isDragging) { 
         requestAnimationFrame(animation);
     }
   }
 
-  function setSliderPosition() {
+  function setSliderPosition() { 
     sliderTrack.style.transform = `translateX(${currentTranslate}px)`;
   }
   // --- END GRAB/SWIPE LOGIC ---
