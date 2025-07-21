@@ -176,7 +176,7 @@ body {
 
 .section-title {
   font-size: 2.5rem;
-  color: #0056b3;
+  color: #F5BA41;
   margin-bottom: 3rem;
   font-weight: 700;
 }
@@ -192,11 +192,12 @@ body {
   width: 100%;
   margin: 0 auto;
   overflow: hidden; /* Biarkan overflow hidden di sini */
-  cursor: grab;
+  cursor: grab; /* Ganti kursor menjadi grab */
+  
 }
-.product-slider.grabbing {
-  cursor: grabbing; /* Ganti kursor saat sedang drag */
-}
+/* .product-slider.grabbing {
+  cursor: grabbing; 
+} */
 .slider-track {
   display: flex;
   transition: transform 0.5s ease-in-out;
@@ -293,7 +294,7 @@ body {
 .product-display-info h3 {
   margin-top: 0;
   font-size: 2rem;
-  color: #0056b3;
+  color: #F5BA41;
   margin-bottom: 1rem;
 }
 
@@ -677,7 +678,9 @@ body {
   line-height: 1.7;
   color: #555;
   margin-bottom: 1rem;
+  text-align: justify;
 }
+
 
 .about-supplier-image img {
   width: 100%;
